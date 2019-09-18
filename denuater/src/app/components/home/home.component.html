@@ -1,0 +1,168 @@
+
+            
+  
+  <h4>Busqueda de Productos <small>por Url</small></h4>
+  <hr>
+
+
+  <form [formGroup]="url">
+    <div class="form-group row">
+      <label class="col-2 col-form-label">URL</label>
+        <div class="col-8">
+          <input class="form-control"
+          type="text"
+          placeholder="valor"
+          formControlName="valor">
+        </div>
+      </div>
+    </form>
+    
+
+
+<div class="d-flex justify-content-center">
+
+  <div class="row">
+    
+    <form (ngSubmit)="enviarUrl()"> 
+      <div class ="form-group row">
+        <label class="col-2 col-form-label">&nbsp;</label>
+        <div class="input-group">
+          <button type="submit" class="btn btn-outline-primary">
+            Enviar
+          </button>
+        </div>
+        
+      </div>
+    </form>
+    
+    <form (ngSubmit)="cargar()">
+      <div class="form-group row">
+        <label class="col-2 col-form-label">&nbsp;</label>
+        <div class="input-group">
+          <button type="submit" class="btn btn-outline-primary">
+            Cargar
+          </button>
+        </div>
+      </div>
+    </form>
+    <form (ngSubmit)="enviarForm()">
+      <div class="form-group row">
+        <label class="col-2 col-form-label">&nbsp;</label>
+        <div class="input-group">
+          <button type="submit" class="btn btn-outline-primary">
+            CSV
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<hr>
+  
+  <form [formGroup]=forma >
+    <!-- <div class="form-group row">
+      <label class="col-2 col-form-label">Id</label>
+      <div class="col-8">
+        
+        <input class="form-control"
+        type="text"
+        placeholder="id"
+        formControlName="id">
+      </div>
+    </div> -->
+    
+    <div class="row d-flex  ">  
+      <div class="d-flex flex-fill  flex-column bd-highlight mb-1">   
+        <div class="form-group row">
+          <label class="col-2 col-form-label">Id</label>
+          <div class="col-8">
+            <input class="form-control"
+            type="text"
+            placeholder="ID"
+            formControlName="_id">
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <label class="col-2 col-form-label">Titulo</label>
+          <div class="col-8">
+            
+            <input class="form-control"
+            type="text"
+            placeholder="titulo"
+            formControlName="titulo">
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <label class="col-2 col-form-label">Categoria</label>
+          <div class="col-8">
+            
+            <input class="form-control"
+            type="text"
+            placeholder="categoria"
+            formControlName="categoria">
+          </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Marca</label>
+            <div class="col-8">
+              
+              <input class="form-control"
+              type="text"
+              placeholder="marca"
+              formControlName="marca">
+            </div>
+          </div>
+        
+        <div class="form-group row">
+          <label class="col-2 col-form-label">Precio</label>
+          <div class="col-md-8">
+            <input class="form-control"
+            type="text"
+            placeholder="precio"
+            formControlName="precio">
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <label class="col-2 col-form-label">Caracteristicas</label>
+          <div class="col-md-8">
+            <textarea
+            rows="5"
+            class="form-control"
+            type="caracteristicas"
+            placeholder="caracteristicas"
+            formControlName="caracteristicas">
+          </textarea>
+        </div>
+      </div>    
+      </div> 
+      <div class="d-flex flex-fill flex-column bd-highlight mb-3">   
+          <div *ngFor="let imagen of imagenes" class="form-group row">
+            <label class="col-2 col-form-label">Imagenes</label>
+            <div class="col-8">
+              <input class="form-control"
+              type="imagenes"
+              placeholder="imagenes"
+              formControlName="imagenes">
+            </div>
+          </div>   
+      </div> 
+     
+      <div  class="d-flex   flex-column bd-highlight mb-3">
+          <img [src]="imagen" *ngFor="let imagen of imagenes" class="form-group row" alt="...">
+        </div>
+      </div>   
+    <hr> 
+
+
+
+    
+  </form>
+
+
+  
+
+

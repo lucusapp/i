@@ -1,0 +1,314 @@
+<hr />
+
+<div class="titulo">
+  <div class="row">
+    <h3>Producto &nbsp;<small>{{producto.titulo}}</small></h3>
+  </div>
+
+  <div class="row">
+    <button
+    class="btn btn-primary"
+    (click)="inicializar()"
+    [routerLink]="['/producto/nuevo']"
+    type="submit"
+    >INICIO
+
+    </button>
+  </div>
+
+  <div class="row">
+    <div class="input-group">
+      <button
+        class="btn btn-success"
+        routerLink="/ebay/inventario"
+        type="submit"
+      >
+        <i class="fa fa-arraw-left"></i>
+        REGRESAR
+      </button>
+    </div>
+  </div>
+</div>
+
+<form [formGroup]="forma" (ngSubmit)="enviar()">
+  <div class="row d-flex flex-fill mt-5 ">
+      <div class="d-flex flex-fill  flex-column bd-highlight mb-1">
+          <div class="form-group row">
+        <label class="col-2 col-form-label">Id</label>
+        <div class="col-8">
+          <input
+          class="form-control"
+          type="text"
+          placeholder="ID"
+          formControlName="id"
+          name="id"
+          [attr.disabled]="true"
+          />
+          <small class="form-text text-muted">Este campo es autogenerado {{producto.id}}</small>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Titulo</label>
+        <div class="col-8 ">
+          <input
+          class="form-control"
+          type="text"
+          placeholder="titulo"
+          formControlName="titulo"
+          />
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Categoria</label>
+        <div class="col-8">
+          <input
+          class="form-control"
+          type="text"
+          placeholder="categoria"
+          formControlName="categoria"
+          />
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Marca</label>
+        <div class="col-8">
+          <input
+          class="form-control"
+          type="text"
+          placeholder="marca"
+          formControlName="marca"
+          />
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Precio</label>
+        <div class="col-md-8">
+          <input
+          class="form-control"
+          type="number"
+          placeholder="precio"
+          formControlName="precio"
+          step=".01"
+          />
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Caracteristicas</label>
+        <div class="col-md-8">
+          <textarea
+          type="text"
+          rows="5"
+          class="form-control"
+          type="caracteristicas"
+          placeholder="caracteristicas"
+          formControlName="caracteristicas"
+          >
+        </textarea>
+      </div>
+    </div>
+  </div>
+
+
+
+    <div class="d-flex flex-fill bd-highlight mb-3">
+      <!-- <div *ngFor="let imagen of imagenes" class="form-group row"> -->
+        <label class="col-2 col-form-label">Imagenes</label>
+        <div class="d-flex flex-column col-8" formArrayName="imagenes">
+          <div class="d-flex" *ngFor="let imagen of forma.controls['imagenes'].value; let i =index">
+            <input   
+            [formControlName]="i"
+            class="form-control"
+            type="text"
+            placeholder="imagenes"
+            /> 
+            <button class="btn btn-danger ml-2" (click)="borrarImagen(i)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+          <div class="d-flex flex-column">
+            <button
+            (click)="agregarImagen()"
+            type="button"
+            class="btn btn-primary mt-1"
+            >
+            Agregar imagen
+          </button>
+        </div>
+      <div class="row d-flex mt-5">
+        <div class="row d-flex mr-2" *ngFor="let imagen of imagenes">
+          <div class="d-flex flex-column ml-5">
+            <img
+            [src]="imagen"
+            class="form-group row"
+            alt="..."
+            width="100"
+            height="100"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+ 
+
+ 
+
+    <!-- <div class="d-flex flex-fill bd-highlight mb-3">
+            <label class="col-2 col-form-label">Talla</label> 
+            <div class="col-md-8" formArrayName="tallas"
+                *ngFor="let talla of forma.get('tallas').controls;let i =index;">
+                <div [formGroupName]="i">
+
+
+                <input 
+                class="form-control"
+                type="number"
+                placeholder="talla"
+                formControlName="talla"
+                />
+                <input 
+                class="form-control"
+                type="number"
+                placeholder="cantidad"
+                formControlName="cantidad"
+                />
+
+
+
+              </div>
+
+                <div class="d-flex flex-column">
+                  <button 
+                  (click)="agregartalla()"
+                  type="button"
+                  class="btn-primary mt-2">
+                  <i class="fa fa-plus"></i>
+                </button>
+            </div>
+          </div>
+        </div> -->
+      </div>
+  
+             
+    
+    <div class="d-flex justify-content-center">
+      <div class="row">
+        <div class="form-group row">
+          <label class="col-2 col-form-label">&nbsp;</label>
+          <div class="input-group">
+            <button
+            routerLink="/ebay/producto/nuevo"
+            type="submit"
+            class="btn btn-primary"
+            >
+            ENVIAR
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nº</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Precio</th>
+        <th scope="col">PreCompra</th>
+        <th scope="col">comiPay</th>
+        <th scope="col">comiEbay</th>
+        <th scope="col">Portes</th>
+        <th scope="col">margen</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of productos; let i=index">
+        <th scope="row">{{i+1}}</th>
+        <!-- <td>
+          <input
+          class="form-control"
+          type="date"
+          placeholder="fecha"
+          formControlName="fecha"
+          required
+
+          />
+        </td> -->
+        <td><input
+          class="form-control"
+          type="number"
+          placeholder="precio"
+          formControlName="precio"
+          step=".01"
+          /></td>
+          <td><input
+            class="form-control"
+            type="number"
+            placeholder="preCompra"
+            formControlName="preCompra"
+            step=".01"
+            required
+            /></td>
+            <td><input
+              class="form-control"
+              type="number"
+              placeholder="comiPay"
+              formControlName="comiPay"
+              step=".01"
+              required
+              />
+            </td>
+            <td>
+                <input
+                class="form-control"
+                type="number"
+                placeholder="comiEbay"
+                formControlName="comiEbay"
+                step=".01"
+                required
+                />
+            </td>
+            <td>
+                <input
+                class="form-control"
+                type="number"
+                placeholder="portes"
+                formControlName="portes"
+                step=".01"
+                required
+                />
+            </td>
+            <td>
+                <input
+                class="form-control"
+                type="number"
+                placeholder="margen"
+                formControlName="margen"
+                [attr.disabled]="true"
+                />
+              
+              </td>
+              <button (click)="agregarPrecio()"
+                      class="btn-danger mt-3">
+                <i class="fa fa-plus"></i>
+              </button>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+
+
+
+
+
+
+
+  <!-- {{producto|json}} {{producto.id|json}} -->
+

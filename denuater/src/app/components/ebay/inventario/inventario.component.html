@@ -1,0 +1,57 @@
+<div class="titulo texto">
+    <div class="row">
+      <h3>Inventario de Productos</h3>
+    </div>
+    <div class="row">
+      <div class="input-group">
+        <button
+          class="btn btn-danger"
+          (click)="excel()"
+          type="submit"
+        >
+          <i class="fas fa-file-csv"></i>
+          CSV
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <table class="table mt-4 texto">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Accion</th>
+        <th scope="col">Titulo</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Caracteristicas</th>
+        <th scope="col">Imagenes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="texto" *ngFor="let producto of productos; let i=index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{producto.accion}}</td>
+        <td>{{producto.titulo |slice:0:25}}</td>
+        <td>{{producto.precio}}</td>
+        <td>{{producto.marca}}</td>
+        <td>{{producto.categoria}}</td>
+        <td>{{producto.caracteristicas |slice:0:150}}</td>
+        <td>
+          <div class="flex row">
+            <button
+            class="btn btn-info mr-1"
+            [routerLink]="['/producto',producto.id]"
+            >
+            <i class="fa fa-pen"></i>
+          </button>
+          <button class="btn btn-danger ml-1" (click)="borrarProducto(producto)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  

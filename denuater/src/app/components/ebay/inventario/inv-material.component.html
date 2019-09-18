@@ -1,0 +1,67 @@
+
+<div class="search-div">
+  <button mat-raised-botton (click)="onCreate()">
+    <mat-icon>add</mat-icon>Create
+  </button>
+  <mat-form-field class="search-form-field" floatLabel="never">
+    <input matInput [(ngModel)]="searchKey" placeholder="buscar" (keyup)="applyfilter()">
+    <button mat-button matSuffix mat-icon-button arial-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+    <mat-icon>Close</mat-icon>
+  </button>
+  </mat-form-field>
+</div>
+
+
+
+
+<div class="mat-elevation-z8 mt-2">
+  <table mat-table [dataSource]="listData" matSort>
+    <ng-container matColumnDef="titulo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Titulo</mat-header-cell>
+      <mat-cell *matCellDef="let producto">{{producto.titulo| slice:0:40}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="caracteristicas">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Caracteristicas</mat-header-cell>
+      <mat-cell *matCellDef="let producto">{{producto.caracteristicas| slice:0:100}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="precio" layout-align="center">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Precio</mat-header-cell>
+      <mat-cell class=" d-flex justify-content-center" *matCellDef="let producto">{{producto.precio}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="marca">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Marca</mat-header-cell>
+      <mat-cell *matCellDef="let producto">{{producto.marca| slice:0:100}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="categoria">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Categoria</mat-header-cell>
+      <mat-cell *matCellDef="let producto">{{producto.categoria| slice:0:100}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="imagenes">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Imagenes</mat-header-cell>
+        <mat-cell *matCellDef="let producto">
+          <img src="{{producto.imagenes}}" width="100"></mat-cell>
+    </ng-container> 
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+        <mat-cell *matCellDef="let producto">
+          <button mat-icon-button  [routerLink]="['/producto',producto.id]" ><mat-icon>launch</mat-icon></button>
+          <button mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+        </mat-cell>
+  </ng-container> 
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row;columns:displayedColumns"></mat-row>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5,10,25,100]" [pageSize]="5"></mat-paginator>
+
+</div>
+
+
+
+<h3>Export as XlsX</h3>
+<div class="container">
+  <button mat-raised-button color="primary"(click)="exportAsXLSX()">Export
+    <mat-icon>trending_down</mat-icon>
+  </button>
+  <button mat-raised-button color="accent">Accent</button>
+</div>
