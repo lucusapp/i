@@ -118,7 +118,7 @@
     <div class="d-flex flex-fill bd-highlight mb-3">
       <!-- <div *ngFor="let imagen of imagenes" class="form-group row"> -->
         <label class="col-2 col-form-label">Imagenes</label>
-        <div class="d-flex flex-column col-8" formArrayName="imagenes">
+        <div gitclass="d-flex flex-column col-8" formArrayName="imagenes">
           <div class="d-flex" *ngFor="let imagen of forma.controls['imagenes'].value; let i =index">
             <input   
             [formControlName]="i"
