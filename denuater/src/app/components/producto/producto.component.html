@@ -17,16 +17,16 @@
   </div>
 
   <div class="row">
-    <div class="input-group">
+
       <button
         class="btn btn-success"
-        routerLink="/ebay/inventario"
+        [routerLink]="['/ebay/inventario']"
         type="submit"
       >
         <i class="fa fa-arraw-left"></i>
         REGRESAR
       </button>
-    </div>
+
   </div>
 </div>
 
@@ -202,7 +202,7 @@
           <label class="col-2 col-form-label">&nbsp;</label>
           <div class="input-group">
             <button
-            routerLink="/ebay/producto/nuevo"
+            routerLink="/producto/nuevo"
             type="submit"
             class="btn btn-primary"
             >
