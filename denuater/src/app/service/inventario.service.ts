@@ -24,50 +24,31 @@ const EXCEL_EXT = ".xlsx";
 export class InventarioService {
   private url = "https://deniuater.firebaseio.com/";
   id: any;
+  fb: FormBuilder;
 
-  constructor(private http: HttpClient) {}
 
-  forma = new FormGroup({
-    id: new FormControl(""),
-    //'accion': new FormControl('Add'),
-    titulo: new FormControl(""),
-    marca: new FormControl(""),
-    precio: new FormControl("0"),
-    categoria: new FormControl(""),
-    caracteristicas: new FormControl(""),
-    //fecha: new FormControl(""),
-    imagenes: new FormArray([new FormControl("")]),
-    preCompra: new FormControl(""),
-    comiPay: new FormControl("0"),
-    comiEbay: new FormControl("0"),
-    portes: new FormControl(""),
-    margen: new FormControl("")
-    // tallas: this.fb.array([
-    //   this.crearTalla()
-    // ])
-  });
 
-  inicializar() {
+  
+  constructor(private http: HttpClient, fb:FormBuilder) {
 
-    return this.forma.reset()
-    this.forma.patchValue({
-      id: "nuevo",
-      //'accion': new FormControl('Add'),
-      titulo: "",
-      marca: "",
-      precio: "0",
-      categoria: "",
-      caracteristicas: "",
-      //fecha: "",
-      imagenes: [""],
-      preCompra: "",
-      comiPay: "",
-      comiEbay: "",
-      portes: "",
-      margen: ""
-      //tallas: [""]
-    });
+    
   }
+ 
+    
+
+    
+    addconta():FormGroup{
+      return this.fb.group({
+        fecha: [''],
+        preCompra: [''],
+        comiPay: [''],
+        comiEbay: [''],
+        portes: [''],
+        margen: ['']
+      })
+
+  }
+
 
   crearProducto(producto: interproductos) {
     return this.http.post(`${this.url}/inventario.json`, producto).pipe(

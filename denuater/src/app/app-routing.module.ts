@@ -6,6 +6,7 @@ import { InventarioComponent } from './components/ebay/inventario/inventario.com
 import { PedidosComponent } from './components/ebay/inventario/pedidos.component';
 import { InvMaterialComponent } from './components/ebay/inventario/inv-material.component';
 import { ProductoComponent } from './components/producto/producto.component';
+import { PruebasComponent } from './components/pruebas/pruebas.component';
 
 
 
@@ -19,6 +20,7 @@ const routes: Routes = [
       {path : '**', component: InvMaterialComponent}
     ]
   },
+  {path : 'pruebas', component: PruebasComponent},
   {path : 'producto/:id', component: ProductoComponent},
   {path : '', component: HomeComponent},
   {path : '**', component: HomeComponent}

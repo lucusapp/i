@@ -27,6 +27,7 @@ import { MaterialModule } from './material/material.module'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { InvMaterialComponent } from './components/ebay/inventario/inv-material.component';
 import { MatInputModule } from '@angular/material';
+import { PruebasComponent } from './components/pruebas/pruebas.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { MatInputModule } from '@angular/material';
     InventarioComponent,
     PedidosComponent,
     InvMaterialComponent,
-    ProductoComponent
+    ProductoComponent,
+    PruebasComponent
     
     
   ],

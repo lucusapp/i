@@ -23,7 +23,9 @@ export class ProductoComponent implements OnInit {
   producto = new interproductos();
   productos = [];
   imagenes = [];
-  tallas: FormArray;
+  tallas= [];
+
+  
 
   constructor(
     private inv: InventarioService,
@@ -31,26 +33,24 @@ export class ProductoComponent implements OnInit {
     private fb: FormBuilder
   ) {}
   ngOnInit() {
-    this.forma = this.inv.forma;
-    // this.forma = new FormGroup({
-    //   id: new FormControl(""),
-    //   //'accion': new FormControl('Add'),
-    //   titulo: new FormControl(""),
-    //   marca: new FormControl(""),
-    //   precio: new FormControl(""),
-    //   categoria: new FormControl(""),
-    //   caracteristicas: new FormControl(""),
-    //   fecha: new FormControl(""),
-    //   imagenes: new FormArray([new FormControl("")]),
-    //   preCompra: new FormControl(""),
-    //   comiPay: new FormControl("0"),
-    //   comiEbay: new FormControl("0"),
-    //   portes: new FormControl(),
-    //   margen: new FormControl(this.producto.margen),
-    //   // tallas: this.fb.array([
-    //   //   this.crearTalla()
-    //   // ])
-    // });
+  this.forma = this.fb.group({
+      id: 'salchicha',
+      accion: 'add',
+      titulo: '',
+      marca: '',
+      precio: '',
+      categoria: '',
+      caracteristicas: '',
+      imagenes: this.fb.array([new FormControl("")]),
+      conta: this.fb.array([
+        this.addconta()
+      ]),
+      tallas: this.fb.array([
+          this.crearTalla()
+        ])  
+      })
+      
+      
 
     const id = this.route.snapshot.paramMap.get("id");
     console.log(id)
@@ -59,7 +59,7 @@ export class ProductoComponent implements OnInit {
       this.inv.getProducto(id).subscribe((resp: interproductos) => {
         this.producto = resp;
         this.productos.push(resp);
-        // this.tallas=resp.tallas
+        this.tallas=resp.tallas
 
         console.log(this.producto);
         this.imagenes = resp.imagenes;
@@ -78,33 +78,20 @@ export class ProductoComponent implements OnInit {
           pictures.push(new FormControl(picture))
         );
         console.log(pictures.value);
+
+        const tamanos = this.forma.get ("tallas") as FormArray;
+        while (tamanos.length){
+          tamanos.removeAt(0)
+        }
+
+         resp.tallas.forEach(tamano=>
+          tamanos.push(new FormControl(tamano)))
+            
       });
     } else {
       this.forma.reset()
-      
-      
-      
-      // setValue({
-      //   id: "nuevo",
-      //   //'accion': new FormControl('Add'),
-      //   titulo: "",
-      //   marca: "",
-      //   precio: "",
-      //   categoria: "",
-      //   caracteristicas: "",
-      //   // fecha: "",
-      //   imagenes: [""],
-      //   preCompra: "",
-      //   comiPay: "0",
-      //   comiEbay: "0",
-      //   portes: "",
-      //   margen: ""
-      //   //   tallas: ([""
-      //   // ])
-      // });
     }
   }
-
   enviar(forma: NgForm) {
     if (this.forma.invalid) {
       return;
@@ -135,11 +122,30 @@ export class ProductoComponent implements OnInit {
     });
   }
 
+  addconta():FormGroup{
+    return this.fb.group({
+      fecha: [''],
+      preCompra: [''],
+      comiPay: [''],
+      comiEbay: [''],
+      portes: [''],
+      margen: ['']
+    })
+
+}
+
+
   agregarImagen() {
     (<FormArray>this.forma.controls["imagenes"]).push(new FormControl(""));
   }
   borrarImagen(i: number) {
     (<FormArray>this.forma.controls["imagenes"]).removeAt(i);
+  }
+
+  agregarConta(){
+
+    const conta = <FormArray>(this.forma.controls["conta"]);
+    conta.push(this.addconta())
   }
 
   crearTalla(): FormGroup {
@@ -150,16 +156,19 @@ export class ProductoComponent implements OnInit {
   }
 
   agregartalla(): void {
-    this.tallas = this.forma.get("tallas") as FormArray;
-    this.tallas.push(this.crearTalla());
+    (<FormArray>this.forma.controls["tallas"]).push(this.crearTalla())
   }
+
+  borrarTalla(i:number){
+    (<FormArray>this.forma.controls["tallas"]).removeAt(i);
+  }
+  
 
   inicializar(){
     this.forma.reset()
 
   // (<FormArray>this.forma.controls["tallas"]).push(new FormControl(""))
-
-//this.forma.controls["precio"].value(new FormControl);
+  //this.forma.controls["precio"].value(new FormControl);
 
   }
 }

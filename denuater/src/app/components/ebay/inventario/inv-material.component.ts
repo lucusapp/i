@@ -45,7 +45,7 @@ export class InvMaterialComponent implements OnInit {
   }
 
   onCreate(){
-    this.invSer.inicializar()
+
     
     const DialogConfig = new MatDialogConfig();
     DialogConfig.disableClose = false,
@@ -53,7 +53,6 @@ export class InvMaterialComponent implements OnInit {
     this.dialog.open(ProductoComponent, DialogConfig)
 
   }
-
 
   exportAsXLSX(){
     this.invSer.exportToExcel(this.listData.data,'my_export');

@@ -31,7 +31,7 @@
 </div>
 
 <form [formGroup]="forma" (ngSubmit)="enviar()">
-  <div class="row d-flex flex-fill mt-5 ">
+  <div class="row d-flex  mt-5 ">
       <div class="d-flex flex-fill  flex-column bd-highlight mb-1">
           <div class="form-group row">
         <label class="col-2 col-form-label">Id</label>
@@ -115,10 +115,10 @@
 
 
 
-    <div class="d-flex flex-fill bd-highlight mb-3">
+    <div class="d-flex flex-fill flex-column bd-highlight mb-3">
       <!-- <div *ngFor="let imagen of imagenes" class="form-group row"> -->
-        <label class="col-2 col-form-label">Imagenes</label>
-        <div gitclass="d-flex flex-column col-8" formArrayName="imagenes">
+        <label class="col-2 ml-5 col-form-label">Imagenes</label>
+        <div class="d-flex flex-column col-8" formArrayName="imagenes">
           <div class="d-flex" *ngFor="let imagen of forma.controls['imagenes'].value; let i =index">
             <input   
             [formControlName]="i"
@@ -158,47 +158,59 @@
 
  
 
-    <!-- <div class="d-flex flex-fill bd-highlight mb-3">
-            <label class="col-2 col-form-label">Talla</label> 
-            <div class="col-md-8" formArrayName="tallas"
-                *ngFor="let talla of forma.get('tallas').controls;let i =index;">
-                <div [formGroupName]="i">
+    <div class="d-flex flex-column bd-highlight mb-3">
+      <div class="d-flex flex-row ">
 
+        <label class="col-2 col-form-label d-flex flex-row">Talla</label> 
+        <button 
+        (click)="agregartalla()"
+        type="button"
+        class="btn-primary ml-5">
+        <i class="fa fa-plus"></i>
+      </button>
+    </div>
+            <div class="col-md-8" formArrayName="tallas">
 
+              <div class="d-flex" *ngFor="let talla of forma.get('tallas').controls;let i =index;">
+                <div [formGroupName]="i" class="input-group">
+                  
                 <input 
                 class="form-control"
                 type="number"
                 placeholder="talla"
-                formControlName="talla"
+                formControlName="talla .col-xs-3"
                 />
+                <span class="input-group-addon">-</span>
                 <input 
                 class="form-control"
                 type="number"
                 placeholder="cantidad"
                 formControlName="cantidad"
                 />
-
-
-
               </div>
-
-                <div class="d-flex flex-column">
-                  <button 
-                  (click)="agregartalla()"
-                  type="button"
-                  class="btn-primary mt-2">
-                  <i class="fa fa-plus"></i>
+              
+              <div class="d-flex flex-row mt-1">
+                <button 
+                (click)="agregartalla()"
+                type="button"
+                class="btn-primary ml-2">
+                <i class="fa fa-plus"></i>
+              </button>
+              <button class="btn btn-danger ml-2" (click)="borrarTalla(i)">
+                  <i class="fa fa-trash"></i>
                 </button>
             </div>
           </div>
-        </div> -->
+        </div>
       </div>
+    </div>
+        
   
-             
-    
-    <div class="d-flex justify-content-center">
-      <div class="row">
-        <div class="form-group row">
+      
+      
+      <div class="d-flex justify-content-center">
+        <div class="row">
+          <div class="form-group row">
           <label class="col-2 col-form-label">&nbsp;</label>
           <div class="input-group">
             <button
@@ -216,93 +228,97 @@
   
   
   <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Nº</th>
-        <th scope="col">Fecha</th>
-        <th scope="col">Precio</th>
-        <th scope="col">PreCompra</th>
-        <th scope="col">comiPay</th>
-        <th scope="col">comiEbay</th>
-        <th scope="col">Portes</th>
-        <th scope="col">margen</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of productos; let i=index">
-        <th scope="row">{{i+1}}</th>
-        <!-- <td>
-          <input
-          class="form-control"
-          type="date"
-          placeholder="fecha"
-          formControlName="fecha"
-          required
+      <thead>
+        <tr>
+          <th scope="col">Nº</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Precio</th>
+          <th scope="col">PreCompra</th>
+          <th scope="col">comiPay</th>
+          <th scope="col">comiEbay</th>
+          <th scope="col">Portes</th>
+          <th scope="col">margen</th>
+        </tr>
+      </thead>
 
-          />
-        </td> -->
-        <td><input
-          class="form-control"
-          type="number"
-          placeholder="precio"
-          formControlName="precio"
-          step=".01"
-          /></td>
+
+      <tbody *ngFor="let conta of forma.get('conta').controls; let i=index">
+        <tr [formGroup]="conta">
+          <th scope="row">{{i+1}}</th>
+          <td>
+            <input
+            class="form-control"
+            type="date"
+            placeholder="fecha"
+            formControlName="fecha"
+            required
+  
+            />
+          </td>
           <td><input
             class="form-control"
             type="number"
-            placeholder="preCompra"
-            formControlName="preCompra"
+            placeholder="precio"
+            formControlName="precio"
             step=".01"
-            required
             /></td>
             <td><input
               class="form-control"
               type="number"
-              placeholder="comiPay"
-              formControlName="comiPay"
+              placeholder="preCompra"
+              formControlName="preCompra"
               step=".01"
               required
-              />
-            </td>
-            <td>
-                <input
+              /></td>
+              <td><input
                 class="form-control"
                 type="number"
-                placeholder="comiEbay"
-                formControlName="comiEbay"
+                placeholder="comiPay"
+                formControlName="comiPay"
                 step=".01"
                 required
                 />
-            </td>
-            <td>
-                <input
-                class="form-control"
-                type="number"
-                placeholder="portes"
-                formControlName="portes"
-                step=".01"
-                required
-                />
-            </td>
-            <td>
-                <input
-                class="form-control"
-                type="number"
-                placeholder="margen"
-                formControlName="margen"
-                [attr.disabled]="true"
-                />
-              
               </td>
-              <button (click)="agregarPrecio()"
-                      class="btn-danger mt-3">
-                <i class="fa fa-plus"></i>
-              </button>
-            </tr>
-          </tbody>
-        </table>
-      </form>
+              <td>
+                  <input
+                  class="form-control"
+                  type="number"
+                  placeholder="comiEbay"
+                  formControlName="comiEbay"
+                  step=".01"
+                  required
+                  />
+              </td>
+              <td>
+                  <input
+                  class="form-control"
+                  type="number"
+                  placeholder="portes"
+                  formControlName="portes"
+                  step=".01"
+                  required
+                  />
+              </td>
+              <td>
+                  <input
+                  class="form-control"
+                  type="number"
+                  placeholder="margen"
+                  formControlName="margen"
+                  [attr.disabled]="true"
+                  />
+                
+                </td>
+                <button 
+                  class="btn-danger mt-3"
+                  (click)="agregarConta()"
+                  >
+                  <i class="fa fa-plus"></i>
+                </button>
+              </tr>
+            </tbody>
+          </table>
+  </form>
 
 
 
